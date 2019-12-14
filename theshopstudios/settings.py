@@ -25,7 +25,7 @@ SECRET_KEY = '2vcxqjjw@u)y5g+wf&3@=%(23k2x@$@f7=y(_+^bq*30zpzkv('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'theshopstudios.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'theshopstudios.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'theshopstudios.urls'
@@ -119,17 +120,17 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+# 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-if os.getenv('IS_ON_HEROKU', False):
-    STATICFILE_DIRECTORY = 'static'
-else:
-    STATICFILE_DIRECTORY = 'static/assets'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, STATICFILE_DIRECTORY)
-]
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
