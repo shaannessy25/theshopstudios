@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'userpost.apps.UserpostConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
